@@ -1,0 +1,11 @@
+/* src/styles/Layout.css */
+.layout {
+    display: flex;
+  }
+  
+  .content {
+    margin-left: 250px; /* Same as sidebar width */
+    flex-grow: 1;
+    padding: 20px;
+  }
+  

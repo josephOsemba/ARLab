@@ -1,0 +1,9 @@
+0000000000000000000000000000000000000000 fac5bba1bd026625192dbbf55468c469e168c9e3 josephOsemba <josephowino13101@gmail.com> 1740769218 +0300	commit (initial): first commit
+fac5bba1bd026625192dbbf55468c469e168c9e3 0000000000000000000000000000000000000000 josephOsemba <josephowino13101@gmail.com> 1740769237 +0300	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 fac5bba1bd026625192dbbf55468c469e168c9e3 josephOsemba <josephowino13101@gmail.com> 1740769237 +0300	Branch: renamed refs/heads/master to refs/heads/main
+fac5bba1bd026625192dbbf55468c469e168c9e3 3bc53e859be3cf4e20e7aec454dd64776b1713ed josephOsemba <josephowino13101@gmail.com> 1740769218 +0300	filter-branch: rewrite
+3bc53e859be3cf4e20e7aec454dd64776b1713ed 1d671253b9b76ad8092dc6d941434114ef6902d6 josephOsemba <josephowino13101@gmail.com> 1740908424 +0300	commit: updated frontend
+1d671253b9b76ad8092dc6d941434114ef6902d6 41a7aab8bd0bc8b41ad33fe0033ecd9862194023 josephOsemba <josephowino13101@gmail.com> 1740908642 +0300	commit: Removed node_modules from Git tracking
+41a7aab8bd0bc8b41ad33fe0033ecd9862194023 21c1d74276e976cd94cc878b22d84ec48f6168f6 josephOsemba <josephowino13101@gmail.com> 1741827837 +0300	commit: Removed node_modules from tracking
+21c1d74276e976cd94cc878b22d84ec48f6168f6 0000000000000000000000000000000000000000 josephOsemba <josephowino13101@gmail.com> 1742177519 +0300	Branch: renamed refs/heads/main to refs/heads/main
+21c1d74276e976cd94cc878b22d84ec48f6168f6 21c1d74276e976cd94cc878b22d84ec48f6168f6 josephOsemba <josephowino13101@gmail.com> 1742177519 +0300	Branch: renamed refs/heads/main to refs/heads/main

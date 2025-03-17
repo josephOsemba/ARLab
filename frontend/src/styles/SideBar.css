@@ -1,0 +1,144 @@
+/* SideBar.css */
+
+.sidebar {
+    position: fixed;
+    top: 60px; /* Adjust based on Navbar height */
+    left: 0;
+    width: 250px; /* Default width */
+    height: calc(100vh - 60px); /* Adjust height based on Navbar */
+    background-color: #222; /* Dark theme */
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 10; /* Ensure it appears above the Three.js canvas */
+    transition: width 0.3s ease-in-out; /* Smooth collapse animation */
+  }
+  
+  /* Collapsed state */
+  .sidebar.collapsed {
+    width: 60px;
+  }
+  
+  /* Sidebar Header */
+  .sidebar-header {
+    background-color: #23272b;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  .sidebar-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .sidebar-header button {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .sidebar-header button:hover {
+    color: #007bff; /* Highlight on hover */
+  }
+  
+  /* Search Bar & Ask AI Section */
+  .search-ask-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-ask-section input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .search-ask-section input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .search-ask-section button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .search-ask-section button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  /* History Section */
+  .history-section {
+    margin-top: 20px;
+  }
+  
+  .history-section h5 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .history-list {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .history-item {
+    padding: 10px;
+    background-color: #333;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .history-item:hover {
+    background-color: #444; /* Highlight on hover */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px; /* Collapse sidebar on smaller screens */
+    }
+  
+    .sidebar.collapsed {
+      width: 60px;
+    }
+  
+    .sidebar-header h4 {
+      display: none; /* Hide title when collapsed */
+    }
+  
+    .search-ask-section input,
+    .search-ask-section button span,
+    .history-section h5,
+    .history-item span {
+      display: none; /* Hide text when collapsed */
+    }
+  
+    .search-ask-section button,
+    .history-item {
+      justify-content: center;
+    }
+  }
