@@ -1,0 +1,125 @@
+/* PhysicsPracticals.css */
+.physics-practicals-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Content container with spacing below navbar */
+.content-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 80px auto 0; /* Added top margin to push content below navbar */
+  padding: 0 20px 40px;
+}
+
+/* Header styles */
+.experiments-header {
+  margin-bottom: 3rem;
+}
+
+.experiments-header h1 {
+  font-size: 2.2rem;
+  color: #222;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* Experiments list styles */
+.experiments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.experiment-card {
+  padding: 1.8rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid #0066cc;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.experiment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon and title alignment */
+.experiment-header {
+  margin-bottom: 1rem;
+}
+
+.icon-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.experiment-icon {
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+.experiment-title {
+  font-size: 1.3rem;
+  color: #222;
+  font-weight: 600;
+  margin: 0; /* Remove default margins */
+  text-align: left; /* Ensure left alignment */
+}
+
+/* Description and link */
+.experiment-description {
+  text-align: justify;
+  line-height: 1.7;
+  margin: 1rem 0 1.5rem;
+  color: #444;
+  padding-left: 2.5rem; /* Align with title text */
+}
+
+.experiment-link {
+  display: inline-block;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding-left: 2.5rem; /* Align with title text */
+}
+
+.experiment-link:hover {
+  color: #004499;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content-container {
+    margin-top: 70px; /* Adjusted for mobile navbar */
+    padding: 0 15px 30px;
+  }
+  
+  .icon-title-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .experiment-title {
+    font-size: 1.1rem;
+  }
+  
+  .experiment-description,
+  .experiment-link {
+    padding-left: 0;
+  }
+}

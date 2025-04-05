@@ -142,3 +142,9 @@
       justify-content: center;
     }
   }
+
+.history-date {
+  color: #ffa500; /* Orange color for the date */
+  font-weight: bold;
+  margin-bottom: 8px;
+}

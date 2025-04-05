@@ -1,0 +1,45 @@
+/* styles.css */
+
+/* Styling for the entire search bar container */
+.search-bar {
+    width: 100%;
+    max-width: 500px; /* You can adjust the width */
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  /* Styling for the input field */
+  .search-bar input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;  /* Rounded corners */
+    border: 2px solid #ccc;  /* Light border */
+    background-color: #1e1e1e;  /* Dark background to match your default black */
+    color: #fff;  /* White text for better visibility */
+    transition: all 0.3s ease-in-out;  /* Smooth transition for interaction effects */
+  }
+  
+  /* Focus effect for the input */
+  .search-bar input:focus {
+    border-color: #4CAF50;  /* Green border when focused */
+    outline: none;  /* Remove default browser focus outline */
+    background-color: #333;  /* Slightly lighter background */
+  }
+  
+  /* Placeholder text styling */
+  .search-bar input::placeholder {
+    color: #aaa;  /* Light grey color for placeholder */
+    font-style: italic;
+  }
+  
+  /* Add a hover effect for interaction */
+  .search-bar input:hover {
+    border-color: #555;  /* Darker border on hover */
+  }
+  
+  /* Optional: Adding a subtle shadow when the input is active */
+  .search-bar input:active {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Soft shadow */
+  }
+  

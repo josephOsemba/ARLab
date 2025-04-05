@@ -68,7 +68,7 @@ const SideBar = ({ onAskAI, onHistoryItemClick, searchHistory = [], onCollapse }
           {Object.entries(groupedHistory).length > 0 ? (
             Object.entries(groupedHistory).map(([date, items]) => (
               <div key={date}>
-                <h6 className="text-muted">{date}</h6>
+                <h6 className="history-date">{date}</h6>
                 <ul className="history-list">
                   {items.map((item, index) => (
                     <li
