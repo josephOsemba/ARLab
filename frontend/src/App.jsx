@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar"; // Correct import
+import Navbar from "./components/Navbar"; 
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import HomePage from "./pages/EntryPage";
@@ -17,6 +17,15 @@ import Chemistry from './pages/Chemistry';
 import Engineering from './pages/Engineering';
 import HealthEducation from './pages/HealthEducation';
 import HomeScience from './pages/HomeScience';
+import PendulumGravity from "./components/Physics/Pendulum-Gravity/PendulumGravity";
+import Theory from "./components/Physics/Pendulum-Gravity/Theory";
+import Procedure from "./components/Physics/Pendulum-Gravity/Procedure";
+import Evaluation from "./components/Physics/Pendulum-Gravity/Evaluation";
+import Simulator from "./components/Physics/Pendulum-Gravity/Simulator";
+import Assignment from "./components/Physics/Pendulum-Gravity/Assignment";
+import Reference from "./components/Physics/Pendulum-Gravity/Reference";
+import Feedback from "./components/Physics/Pendulum-Gravity/Feedback";
+
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -24,6 +33,15 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
+        <Route path="/practicals/pendulum-gravity" element={<PendulumGravity />}>
+          <Route path="theory" element={<Theory />} />
+          <Route path="procedure" element={<Procedure />} />
+          <Route path="evaluation" element={<Evaluation />} />
+          <Route path="simulator" element={<Simulator />} />
+          <Route path="assignment" element={<Assignment />} />
+          <Route path="reference" element={<Reference />} />
+          <Route path="feedback" element={<Feedback />} />
+        </Route>
         <Route path="/physics" element={<Physics />} />
         <Route path="/biology" element={<Biology />} />
         <Route path="/chemistry" element={<Chemistry />} />

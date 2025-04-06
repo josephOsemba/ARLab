@@ -1,0 +1,110 @@
+/* Base page styling */
+.experiment-page {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  .experiment-page h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+  }
+  
+  /* Sub-headers (if any) */
+  .experiment-page h2 {
+    color: #2980b9;
+    margin-top: 30px;
+  }
+  
+  /* Lists */
+  .experiment-page ol,
+  .experiment-page ul {
+    margin-left: 20px;
+  }
+  
+  .experiment-page strong {
+    color: #16a085;
+  }
+  
+  /* Navigation Icons Container */
+  .nav-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 30px 0;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* Navigation Icon Links */
+  .nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #2c3e50;
+    width: 120px;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-icon:hover {
+    color: #3498db;
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .nav-icon span {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  /* Main content area for nested routes */
+  .experiment-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    .nav-icons {
+      justify-content: center;
+    }
+  
+    .nav-icon {
+      width: 90px;
+      padding: 0.75rem;
+    }
+  
+    .icon {
+      font-size: 1.2rem;
+    }
+  
+    .nav-icon span {
+      font-size: 0.8rem;
+    }
+  }
+  

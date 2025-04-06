@@ -1,0 +1,56 @@
+.theory-section {
+    background-color: #f4f4f9; /* Light blue background */
+    padding: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-content {
+    width: 70%;
+    text-align: left;
+}
+
+.text-content h2, .text-content h3, .text-content h4 {
+    color: #3c3c3c;
+}
+
+.text-content p, .text-content ul, .text-content ol {
+    text-align: justify;
+    color: #555;
+}
+
+.text-content li {
+    color: #555;
+}
+
+.image-placeholder {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.image-placeholder-item {
+    height: 200px;
+    background-color: #b0e0e6; /* Light blue for placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.text-content img {
+    width: 100%; /* Ensures the images do not overflow */
+    max-width: 400px; /* Limits the maximum image width */
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.theory-image, .procedure-image {
+    display: block;
+    margin-top: 20px;
+}
