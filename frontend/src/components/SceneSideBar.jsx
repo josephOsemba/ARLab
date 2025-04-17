@@ -1,10 +1,10 @@
-import React from "react";
-import { useDrag } from "react-dnd"; // For drag-and-drop functionality
+import React from 'react';
+import { useDrag } from 'react-dnd'; // For drag-and-drop functionality
 
 // Lab Appliance Component
 const LabAppliance = ({ type, name, icon }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: "APPLIANCE", // Unique type for drag-and-drop
+    type: 'APPLIANCE', // Unique type for drag-and-drop
     item: { type, name }, // Data to pass to the drop target
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -15,15 +15,16 @@ const LabAppliance = ({ type, name, icon }) => {
     <div
       ref={drag}
       style={{
-        padding: "10px",
-        marginBottom: "10px",
-        backgroundColor: "#444",
-        color: "#fff",
-        cursor: "grab",
+        padding: '10px',
+        marginBottom: '10px',
+        marginTop: '20px',
+        backgroundColor: '#444',
+        color: '#fff',
+        cursor: 'grab',
         opacity: isDragging ? 0.5 : 1,
-        border: "1px solid #666",
-        borderRadius: "5px",
-        textAlign: "center",
+        border: '1px solid #666',
+        borderRadius: '5px',
+        textAlign: 'center',
       }}
     >
       {icon} {name}
@@ -31,42 +32,27 @@ const LabAppliance = ({ type, name, icon }) => {
   );
 };
 
-const SceneSideBar = ({ isOpen, onToggle }) => {
+const SceneSideBar = ({ isOpen }) => {
   return (
     <div
       style={{
-        width: isOpen ? "250px" : "0",
-        height: "100vh",
-        backgroundColor: "#333",
-        color: "#fff",
-        padding: isOpen ? "20px" : "0",
-        boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
-        position: "fixed",
+        width: isOpen ? '250px' : '0',
+        height: '85vh',
+        backgroundColor: '#333',
+        color: '#fff',
+        padding: isOpen ? '20px' : '0',
+        boxShadow: '2px 0 5px rgba(0, 0, 0, 0.1)',
+        position: 'fixed',
         left: 0,
         top: 0,
         zIndex: 1000,
-        overflowX: "hidden",
-        transition: "width 0.3s, padding 0.3s",
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        transition: 'width 0.3s, padding 0.3s',
+        marginTop: '55px',
+        borderRadius: '0 10px 10px 0',
       }}
     >
-      {/* Toggle Button */}
-      <button
-        onClick={onToggle}
-        style={{
-          position: "absolute",
-          right: "-40px",
-          top: "20px",
-          backgroundColor: "#333",
-          color: "#fff",
-          border: "none",
-          padding: "10px",
-          cursor: "pointer",
-          borderRadius: "0 5px 5px 0",
-        }}
-      >
-        {isOpen ? "◄" : "►"}
-      </button>
-
       {/* Sidebar Content */}
       {isOpen && (
         <>

@@ -1,56 +1,47 @@
 .theory-section {
-    background-color: #f4f4f9; /* Light blue background */
-    padding: 20px;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
 .content-wrapper {
-    display: flex;
-    justify-content: space-between;
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .text-content {
-    width: 70%;
-    text-align: left;
+  text-align: left;
 }
 
-.text-content h2, .text-content h3, .text-content h4 {
-    color: #3c3c3c;
+.text-content h2,
+.text-content h3,
+.text-content h4 {
+  color: #1d3557;
+  text-align: left;
 }
 
-.text-content p, .text-content ul, .text-content ol {
-    text-align: justify;
-    color: #555;
+.text-content ul,
+.text-content ol {
+  margin-left: 20px;
 }
 
-.text-content li {
-    color: #555;
+.image-preview-container {
+  margin: 20px 0;
+  text-align: left;
 }
 
-.image-placeholder {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.image-placeholder-item {
-    height: 200px;
-    background-color: #b0e0e6; /* Light blue for placeholder */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-}
-
-.text-content img {
-    width: 100%; /* Ensures the images do not overflow */
-    max-width: 400px; /* Limits the maximum image width */
-    margin-top: 20px;
-    border-radius: 8px;
-}
-
-.theory-image, .procedure-image {
-    display: block;
-    margin-top: 20px;
+.theory-image,
+.procedure-image {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

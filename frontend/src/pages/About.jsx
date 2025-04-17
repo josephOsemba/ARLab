@@ -10,7 +10,9 @@ const About = () => (
   >
     <PageTransition>
       <h1 style={{ color: 'black' }}>About the Project</h1>
-      <p style={{ color: 'black' }}>This lab uses AI and 3D tech to teach physics interactively.</p>
+      <p style={{ color: 'black' }}>
+        This lab uses AI and 3D tech to teach physics interactively.
+      </p>
     </PageTransition>
   </motion.div>
 );

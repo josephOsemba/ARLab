@@ -5,12 +5,12 @@ import SearchBar from '../components/SearchBar';
 import '../styles/EntryPage.css';
 
 // Import images
-import physicsImg from '../assets/health.jpg';
-import biologyImg from '../assets/biology.png';
-import chemistryImg from '../assets/circuit-simulator.jpg';
-import engineeringImg from '../assets/molecular-lab.jpg';
-import healthImg from '../assets/mechanics-lab.jpg';
-import homeScienceImg from '../assets/ohms-law.jpg';
+import physicsImg from '/assets/health.jpg';
+import biologyImg from '/assets/biology.png';
+import chemistryImg from '/assets/circuit-simulator.jpg';
+import engineeringImg from '/public/assets/molecular-lab.jpg';
+import healthImg from '/public/assets/mechanics-lab.jpg';
+import homeScienceImg from '/public/assets/ohms-law.jpg';
 
 const EntryPage = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -20,15 +20,24 @@ const EntryPage = () => {
   const navigate = useNavigate();
 
   const navItems = [
-    'Home', 'Project', 'Workshop', 'Nodal Centres',
-    'News & Events', 'Publications', 'Feedback',
-    'Contact', 'Login', 'Search'
+    'Home',
+    'Project',
+    'Workshop',
+    'Nodal Centres',
+    'News & Events',
+    'Publications',
+    'Feedback',
+    'Contact',
+    'Login',
+    'Search',
   ];
 
   // Theme management
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
     setDarkMode(savedTheme ? savedTheme === 'dark' : prefersDark);
   }, []);
 
@@ -59,9 +68,10 @@ const EntryPage = () => {
     if (value.trim() !== '') {
       try {
         // Replace with actual API call in production
-        const mockResults = cardData.filter(card => 
-          card.title.toLowerCase().includes(value.toLowerCase()) || 
-          card.description.toLowerCase().includes(value.toLowerCase())
+        const mockResults = cardData.filter(
+          (card) =>
+            card.title.toLowerCase().includes(value.toLowerCase()) ||
+            card.description.toLowerCase().includes(value.toLowerCase())
         );
         setSearchResults(mockResults);
       } catch (err) {
@@ -77,39 +87,45 @@ const EntryPage = () => {
     {
       title: 'PHYSICS',
       image: physicsImg,
-      description: 'Explore simulations in mechanics, optics, and electricity with interactive AR tools.',
-      path: '/physics'
+      description:
+        'Explore simulations in mechanics, optics, and electricity with interactive AR tools.',
+      path: '/physics',
     },
     {
       title: 'BIOLOGY',
       image: biologyImg,
-      description: 'Visualize molecular structures, reactions, and chemical processes in a virtual lab environment.',
-      path: '/biology'
+      description:
+        'Visualize molecular structures, reactions, and chemical processes in a virtual lab environment.',
+      path: '/biology',
     },
     {
       title: 'CHEMISTRY',
       image: chemistryImg,
-      description: 'Dive into cell biology, genetics, and anatomy through interactive 3D simulations.',
-      path: '/chemistry'
+      description:
+        'Dive into cell biology, genetics, and anatomy through interactive 3D simulations.',
+      path: '/chemistry',
     },
     {
       title: 'ENGINEERING',
       image: engineeringImg,
-      description: 'Access engineering design tools and circuit simulations tailored for practical learning.',
-      path: '/engineering'
+      description:
+        'Access engineering design tools and circuit simulations tailored for practical learning.',
+      path: '/engineering',
     },
     {
       title: 'HEALTH EDUCATION',
       image: healthImg,
-      description: 'Engage in virtual health training, anatomy modules, and medical simulations.',
-      path: '/health-education'
+      description:
+        'Engage in virtual health training, anatomy modules, and medical simulations.',
+      path: '/health-education',
     },
     {
       title: 'HOME SCIENCE',
       image: homeScienceImg,
-      description: 'Learn about nutrition, textiles, and home management through immersive lab setups.',
-      path: '/home-science'
-    }
+      description:
+        'Learn about nutrition, textiles, and home management through immersive lab setups.',
+      path: '/home-science',
+    },
   ];
 
   return (
@@ -126,22 +142,28 @@ const EntryPage = () => {
               {item}
             </div>
           ))}
-          <button 
+          <button
             onClick={toggleTheme}
             className="theme-toggle"
-            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={
+              darkMode ? 'Switch to light mode' : 'Switch to dark mode'
+            }
           >
-            {darkMode ? <FiSun className="theme-icon" /> : <FiMoon className="theme-icon" />}
+            {darkMode ? (
+              <FiSun className="theme-icon" />
+            ) : (
+              <FiMoon className="theme-icon" />
+            )}
           </button>
         </div>
       </nav>
 
       {/* Search Bar */}
       {showSearch && (
-        <SearchBar 
-          query={query} 
-          onChange={handleSearch} 
-          results={searchResults} 
+        <SearchBar
+          query={query}
+          onChange={handleSearch}
+          results={searchResults}
           darkMode={darkMode}
         />
       )}

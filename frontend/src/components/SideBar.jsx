@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-import { Search, MessageCircle } from "lucide-react";
-import "../styles/SideBar.css";
+import React, { useState } from 'react';
+import { Search, MessageCircle } from 'lucide-react';
+import '../styles/SideBar.css';
 
-const SideBar = ({ onAskAI, onHistoryItemClick, searchHistory = [], onCollapse }) => {
+const SideBar = ({
+  onAskAI,
+  onHistoryItemClick,
+  searchHistory = [],
+  onCollapse,
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   // Filter history based on search query
@@ -30,12 +35,16 @@ const SideBar = ({ onAskAI, onHistoryItemClick, searchHistory = [], onCollapse }
   };
 
   return (
-    <div className={`sidebar bg-secondary text-white ${isCollapsed ? "collapsed" : ""}`}>
+    <div
+      className={`sidebar bg-secondary text-white ${
+        isCollapsed ? 'collapsed' : ''
+      }`}
+    >
       {/* Sidebar Header */}
       <div className="sidebar-header d-flex justify-content-between align-items-center p-3">
         <h4 className="m-0">ARLab</h4>
         <button className="btn btn-sm btn-light" onClick={handleCollapse}>
-          {isCollapsed ? "▶" : "◀"}
+          {isCollapsed ? '▶' : '◀'}
         </button>
       </div>
 
@@ -52,11 +61,17 @@ const SideBar = ({ onAskAI, onHistoryItemClick, searchHistory = [], onCollapse }
             autoFocus
           />
         ) : (
-          <button className="btn btn-light d-flex align-items-center p-2" onClick={() => setIsSearchActive(true)}>
+          <button
+            className="btn btn-light d-flex align-items-center p-2"
+            onClick={() => setIsSearchActive(true)}
+          >
             <Search size={18} className="me-1" /> <span>Search</span>
           </button>
         )}
-        <button className="btn btn-primary d-flex align-items-center p-2" onClick={onAskAI}>
+        <button
+          className="btn btn-primary d-flex align-items-center p-2"
+          onClick={onAskAI}
+        >
           <MessageCircle size={18} className="me-1" /> <span>Ask AI</span>
         </button>
       </div>

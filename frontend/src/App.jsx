@@ -32,7 +32,7 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-        <Routes location={location} key={location.pathname}>
+      <Routes location={location} key={location.pathname}>
         <Route path="/practicals/pendulum-gravity" element={<PendulumGravity />}>
           <Route path="theory" element={<Theory />} />
           <Route path="procedure" element={<Procedure />} />
@@ -42,9 +42,10 @@ const AnimatedRoutes = () => {
           <Route path="reference" element={<Reference />} />
           <Route path="feedback" element={<Feedback />} />
         </Route>
-        <Route path="/physics" element={<Physics />} />
+   
+            <Route path="/physics" element={<Physics />} />
         <Route path="/biology" element={<Biology />} />
-        <Route path="/chemistry" element={<Chemistry />} />
+           <Route path="/chemistry" element={<Chemistry />} />
         <Route path="/engineering" element={<Engineering />} />
         <Route path="/health-education" element={<HealthEducation />} />
         <Route path="/home-science" element={<HomeScience />} />
