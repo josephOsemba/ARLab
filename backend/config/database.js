@@ -1,10 +1,24 @@
-const { Sequelize } = require('sequelize');
-const path = require('path');
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: path.join(__dirname, '..', 'database.sqlite'),
-  logging: false, // disables SQL logs
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-module.exports = sequelize;
+const dbPath = path.join(__dirname, '../../database/arLab.sqlite');
+
+export async function initializeDatabase() {
+  try {
+    const db = await open({
+      filename: dbPath,
+      driver: sqlite3.Database,
+    });
+
+    console.log('Connected to SQLite database at', dbPath);
+    return db;
+  } catch (err) {
+    console.error('SQLite connection error:', err);
+    throw err;
+  }
+}

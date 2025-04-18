@@ -78,74 +78,9 @@ const Theory = () => {
           <h4>Theory Diagram</h4>
           <div className="image-preview-container">
             <img
-              src="/assets/GRAVITY-THEORY.png"
+              src="/assets/GRAVITY-PROCEDURE.png"
               alt="Theory and Procedure"
               className="theory-image "
-              style={{ width: '70%', height: '500px' }}
-            />
-          </div>
-
-          <h3>Procedure</h3>
-          <p>The measurement of the acceleration due to gravity:</p>
-          <p>
-            A simple pendulum may be used to measure the acceleration due to
-            gravity (g). The period is measured for a series of different values
-            of <strong>l</strong>, and a graph is plotted of <strong>l</strong>{' '}
-            against <strong>T²</strong>.
-          </p>
-          <p>
-            The gradient of this graph is <strong>l/T²</strong> and this is
-            equal to <strong>g/4π²</strong>. Therefore,{' '}
-            <strong>g = 4π²l / T²</strong>.
-          </p>
-          <p>
-            From this, the value of <strong>g</strong> can be found. Very
-            accurate determinations by this method have been used in geophysical
-            prospecting.
-          </p>
-
-          <h4>Steps:</h4>
-          <ol>
-            <li>
-              With the arrangement as shown in Figure 1, make{' '}
-              <strong>l = 20cm</strong> and displace the pendulum bob slightly
-              from the equilibrium position to some position A.
-            </li>
-            <li>
-              Release the bob and record the time taken for 20 oscillations,{' '}
-              <strong>t20</strong>.
-            </li>
-            <li>
-              From this time, determine and record the time period{' '}
-              <strong>T</strong>. Now increase the length, <strong>l</strong>,
-              of the string in steps of 20cm and repeat the experiment for 5
-              different lengths. Draw a graph of <strong>l</strong> against{' '}
-              <strong>T²</strong>.
-            </li>
-            <li>Calculate the slope of the graph.</li>
-            <li>
-              From your graph, calculate the acceleration due to gravity{' '}
-              <strong>g</strong> and the error associated with this value.
-              Compare your result with the standard value.
-            </li>
-            <li>
-              Set the length of the pendulum to about 100cm and measure the time
-              taken for 30 complete oscillations for amplitudes,{' '}
-              <strong>θ</strong>, ranging from 10° to 70° in steps of 10°. Hence
-              determine the periods <strong>T1</strong>.
-            </li>
-            <li>
-              Plot a graph of <strong>T1</strong> against amplitude{' '}
-              <strong>θ</strong>, and comment on your results.
-            </li>
-          </ol>
-
-          <h4>Procedure Diagram</h4>
-          <div className="image-preview-container">
-            <img
-              src="/assets/GRAVITY-PROCEDURE.png"
-              alt="Procedure Visual"
-              className="procedure-image"
               style={{ width: '70%', height: '500px' }}
             />
           </div>

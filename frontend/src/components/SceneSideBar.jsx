@@ -56,12 +56,7 @@ const SceneSideBar = ({ isOpen }) => {
       {/* Sidebar Content */}
       {isOpen && (
         <>
-          <h2>Lab Shelf</h2>
-          <LabAppliance type="battery" name="Battery" icon="🔋" />
-          <LabAppliance type="resistor" name="Resistor" icon="🟨" />
-          <LabAppliance type="wire" name="Wire" icon="🔌" />
-          <LabAppliance type="chemical" name="Chemical" icon="🧪" />
-          <LabAppliance type="led" name="LED" icon="💡" />
+          <h2 style={{ color: 'grey' }}>Lab Shelf</h2>
         </>
       )}
     </div>
