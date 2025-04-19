@@ -1,22 +1,32 @@
-import { getOscillations, seedData } from '../services/oscillationService.js';
-
 export async function getOscillationsHandler(req, res) {
   try {
     const db = req.db;
-    const oscillations = await getOscillations(db);
+    const oscillations = await db.all('SELECT * FROM oscillations');
     res.json(oscillations);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
 
-export async function seedOscillationDataHandler(req, res) {
+export async function createOscillationHandler(req, res) {
   try {
     const db = req.db;
-    const result = await seedData(db);
-    res.json(result);
+    const { length, time20 } = req.body;
+    const period = time20 / 20;
+    const t_squared = period * period;
+
+    await db.run(
+      'INSERT INTO oscillations (length, time20, period, t_squared) VALUES (?, ?, ?, ?)',
+      [length, time20, period, t_squared]
+    );
+
+    const newRecord = await db.get(
+      'SELECT * FROM oscillations WHERE id = last_insert_rowid()'
+    );
+    req.app.get('io').emit('new_oscillation', newRecord);
+    res.status(201).json(newRecord);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 }
 
@@ -25,8 +35,6 @@ export async function updateDataHandler(req, res) {
     const db = req.db;
     const { id } = req.params;
     const { length, time20 } = req.body;
-
-    // Calculate derived fields
     const period = time20 / 20;
     const t_squared = period * period;
 

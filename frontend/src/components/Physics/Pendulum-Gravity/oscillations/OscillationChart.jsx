@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const OscillationChart = ({ data }) => {
+const OscillationChart = React.forwardRef(({ data }, ref) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart data={data}>
@@ -35,6 +35,6 @@ const OscillationChart = ({ data }) => {
       </LineChart>
     </ResponsiveContainer>
   );
-};
+});
 
 export default OscillationChart;

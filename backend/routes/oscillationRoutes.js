@@ -1,20 +1,23 @@
 import express from 'express';
 import {
   getOscillationsHandler,
-  seedOscillationDataHandler,
+  createOscillationHandler,
+  updateDataHandler,
+  deleteDataHandler,
 } from '../controllers/oscillationController.js';
 
 const router = express.Router();
 
+// GET all oscillations
 router.get('/', getOscillationsHandler);
-router.post('/seed', seedOscillationDataHandler);
-router.put(
-  '/:id',
-  authenticate,
-  authorizeStudent,
-  validateOscillationData,
-  updateDataHandler
-);
 
-router.delete('/:id', authenticate, authorizeStudent, deleteDataHandler);
+// CREATE new oscillation
+router.post('/', createOscillationHandler);
+
+// UPDATE oscillation
+router.put('/:id', updateDataHandler);
+
+// DELETE oscillation
+router.delete('/:id', deleteDataHandler);
+
 export default router;

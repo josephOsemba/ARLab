@@ -1,8 +1,10 @@
 import express from 'express';
-import cors from 'cors';
 import { initializeDatabase } from './config/database.js';
 import { createOscillationTable } from './models/oscillationModel.js';
 import oscillationRouter from './routes/oscillationRoutes.js';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,40 +14,37 @@ app.use(cors());
 app.use(express.json());
 
 // Database initialization
-let db;
-try {
-  db = await initializeDatabase();
-  await createOscillationTable(db);
+const db = await initializeDatabase();
+await createOscillationTable(db);
 
-  // Add db to request object
-  app.use((req, res, next) => {
-    req.db = db;
-    next();
-  });
+// Add db to request object
+app.use((req, res, next) => {
+  req.db = db;
+  next();
+});
 
-  // Routes
-  app.use('/api/oscillations', oscillationRouter);
+// Routes
+app.use('/api/oscillations', oscillationRouter);
 
-  // Error handling
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
+// WebSocket setup
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  },
+});
 
-  // Start server
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-} catch (err) {
-  console.error('Failed to initialize database:', err);
-  process.exit(1);
-}
+// Attach io to app
+app.set('io', io);
 
-// Close database connection on process exit
+// Start server
+httpServer.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// Close database connection on exit
 process.on('SIGINT', async () => {
-  if (db) {
-    await db.close();
-    console.log('Database connection closed');
-  }
+  await db.close();
   process.exit();
 });

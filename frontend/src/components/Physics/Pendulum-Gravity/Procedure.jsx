@@ -1,65 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import OscillationTable from './oscillations/OscillationTable';
-import OscillationFormModal from './oscillations/OscillationFormModal';
-import OscillationChart from './oscillations/OscillationChart';
-import ExportButtons from './oscillations/ExportButtons';
 import '../../../styles/Theory.css';
 
 const Procedure = () => {
-  onst[(oscillations, setOscillations)] = useState([]);
-  const [socket, setSocket] = useState(null);
-
-  useEffect(() => {
-    const newSocket = io('http://localhost:5000');
-    setSocket(newSocket);
-
-    newSocket.on('update_oscillation', (updatedRecord) => {
-      setOscillations((prev) =>
-        prev.map((r) => (r.id === updatedRecord.id ? updatedRecord : r))
-      );
-    });
-
-    newSocket.on('delete_oscillation', ({ id }) => {
-      setOscillations((prev) => prev.filter((r) => r.id !== id));
-    });
-
-    return () => newSocket.close();
-  }, []);
-
-  const updateRecord = async (id, updatedData) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:5000/api/oscillations/${id}`,
-        updatedData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Update failed:', error);
-      throw error;
-    }
-  };
-
-  const deleteRecord = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this record?')) return;
-
-    try {
-      await axios.delete(`http://localhost:5000/api/oscillations/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        },
-      });
-    } catch (error) {
-      console.error('Delete failed:', error);
-      alert('Failed to delete record');
-    }
-  };
   return (
     <div className="theory-section">
       <div className="content-wrapper">
@@ -132,18 +75,122 @@ const Procedure = () => {
           </div>
 
           <h4 style={{ marginTop: '40px' }}>Table 1</h4>
+          <table className="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Length (cm)</th>
+                <th>Time for 20 oscillations (s)</th>
+                <th>Time period (s)</th>
+                <th>T² (s²)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              {/* Add more rows as needed */}
+            </tbody>
+          </table>
 
-          <div className="oscillations-page">
-            <h2>Pendulum Oscillation Experiment</h2>
+          <h4 style={{ marginTop: '40px' }}>Calculations</h4>
+          <ol>
+            <li>
+              Draw a graph of <strong>T²</strong> against <i>l</i>.
+            </li>
+            <hr />
+            <li>Calculate the slope of the graph.</li>
+          </ol>
 
-            <ExportButtons data={oscillations} />
-            <OscillationTable
-              data={oscillations}
-              onUpdate={updateRecord}
-              onDelete={deleteRecord}
-            />
-            <OscillationChart data={oscillations} />
-          </div>
+          <hr />
+
+          <ol start="3">
+            <li>
+              From your graph, determine the acceleration due to gravity{' '}
+              <strong>g</strong>.
+            </li>
+          </ol>
+
+          <hr />
+
+          <h4 style={{ marginTop: '40px' }}>Table 2</h4>
+          <table className="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>θ (°)</th>
+                <th>0</th>
+                <th>10</th>
+                <th>20</th>
+                <th>30</th>
+                <th>40</th>
+                <th>50</th>
+                <th>60</th>
+                <th>70</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>T30 (s)</strong>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>T1 (s)</strong>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 style={{ marginTop: '40px' }}>QUESTIONS</h4>
+          <ol>
+            <li>What are the SI units of the slope?</li>
+            <hr />
+            <li>Does your graph pass through origin? If not why not?</li>
+            <hr />
+            <li>What is the reason for timing more than one oscillation?</li>
+            <hr />
+            <li>
+              Why must the amplitude of the oscillation be kept small, i.e.,
+              less than 100?
+            </li>
+          </ol>
         </div>
       </div>
     </div>

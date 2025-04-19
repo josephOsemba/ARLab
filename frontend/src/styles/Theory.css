@@ -1,3 +1,4 @@
+/* Base styles */
 .theory-section {
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,7 +25,6 @@
 .text-content h3,
 .text-content h4 {
   color: #1d3557;
-  text-align: left;
 }
 
 .text-content ul,
@@ -46,43 +46,39 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-table.table {
+/* Table styles */
+table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  background-color: #fff;
+  margin: 20px 0;
+  table-layout: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-table.table thead {
-  background-color: #1e293b; /* dark slate */
+th,
+td {
+  padding: 14px 18px;
+  text-align: center;
+  border: 1px solid #cbd5e1;
+  vertical-align: middle;
+}
+
+thead {
+  background-color: #1e293b;
   color: white;
 }
 
-table.table th,
-table.table td {
-  padding: 12px 16px;
-  text-align: center;
-  border: 1px solid #cbd5e1; /* light gray border */
+tbody tr:nth-child(odd) {
+  background-color: #f8fafc;
 }
 
-table.table-striped tbody tr:nth-child(odd) {
-  background-color: #f8fafc; /* subtle striped rows */
-}
-
-table.table-hover tbody tr:hover {
-  background-color: #e2e8f0; /* light blue-gray on hover */
+tbody tr:hover {
+  background-color: #e2e8f0;
   transition: background-color 0.3s ease;
 }
 
-h4 {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #0f172a; /* slate-900 */
-}
-
-/* Oscillation */
+/* Oscillations page specific */
 .oscillations-page {
   padding: 2rem;
   max-width: 900px;
@@ -90,7 +86,6 @@ h4 {
   background: #f8f9fa;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', sans-serif;
 }
 
 .oscillations-page h2 {
@@ -99,6 +94,7 @@ h4 {
   color: #333;
 }
 
+/* Form and buttons */
 .form-modal {
   display: flex;
   gap: 1rem;
@@ -115,15 +111,18 @@ h4 {
   width: 200px;
 }
 
-.form-modal button {
-  background-color: #007bff;
-  color: white;
-  border: none;
+button {
   padding: 0.5rem 1rem;
+  border: none;
   border-radius: 0.5rem;
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+}
+
+.form-modal button {
+  background-color: #007bff;
+  color: white;
 }
 
 .form-modal button:hover {
@@ -139,104 +138,18 @@ h4 {
 
 .export-buttons button {
   background: #28a745;
-  border: none;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
 }
 
 .export-buttons button:hover {
   background: #218838;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 2rem;
-}
-
-th,
-td {
-  padding: 0.75rem;
-  text-align: center;
-  border: 1px solid #ddd;
-}
-
-thead {
-  background-color: #343a40;
-  color: white;
-}
-
-tbody tr:hover {
-  background-color: #e9ecef;
-}
-
-.table button {
-  margin: 0 5px;
-  padding: 3px 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.table button:hover {
-  background-color: #f0f0f0;
-}
-
-.table input {
-  width: 80px;
-  padding: 3px;
-}
-
-.oscillation-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.oscillation-table th,
-.oscillation-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-.oscillation-table th {
-  background-color: #f2f2f2;
-}
-
-.oscillation-table input {
-  width: 80px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.oscillation-table input.error {
-  border-color: #ff4444;
-}
-
-.error-message {
-  color: #ff4444;
-  font-size: 0.8em;
-  margin-top: 5px;
-}
-
+/* Table actions */
 .actions {
   display: flex;
   gap: 5px;
   justify-content: center;
-}
-
-button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
 }
 
 .edit-btn {
@@ -261,4 +174,118 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+
+/* Input fields */
+input[type='number'] {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input[type='number']:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input.error {
+  border-color: #ff4444;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-modal input {
+    width: 100%;
+  }
+
+  input[type='number'] {
+    width: 100%;
+  }
+}
+
+/* Headings */
+h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-content,
+  .print-content * {
+    visibility: visible;
+  }
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .no-print {
+    display: none !important;
+  }
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  th,
+  td {
+    border: 1px solid #000 !important;
+    padding: 8px !important;
+  }
+  th {
+    background-color: #f2f2f2 !important;
+  }
+  svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+.simulator-options {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.options-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.option-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 300px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: #4a89dc;
+}
+
+.option-card h3 {
+  color: #4a89dc;
+  margin-bottom: 1rem;
 }
