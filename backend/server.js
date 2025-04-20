@@ -39,6 +39,9 @@ app.set('io', io);
     app.use(express.json());
     app.use(express.static(join(__dirname, 'public')));
 
+    // Serve static 3D model files
+    app.use('/models', express.static(join(__dirname, 'models')));
+
     // Attach db to request
     app.use((req, res, next) => {
       req.db = db;

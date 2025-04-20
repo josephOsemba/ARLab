@@ -3,17 +3,16 @@ import {
   saveScene,
   loadScene,
   getAvailableScenes,
+  getAll3DModels,
 } from '../controllers/labSceneController.js';
 
 const router = express.Router();
 
-// Save current scene configuration
 router.post('/save', saveScene);
-
-// Load a specific scene configuration
 router.get('/load/:sceneId', loadScene);
+router.get('/models', getAvailableScenes);
 
-// Get all available scenes
-router.get('/available', getAvailableScenes);
+// Modular route to get models
+router.get('/3d-models', getAll3DModels);
 
 export default router;
