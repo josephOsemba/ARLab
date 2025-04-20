@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import OscillationTable from './oscillations/OscillationTable';
 import OscillationFormModal from './oscillations/OscillationFormModal';
 import OscillationChart from './oscillations/OscillationChart';
@@ -25,7 +27,7 @@ const Simulator = () => {
     setShowOptions(false);
 
     if (option === '3d-lab') {
-      navigate('/3d-lab'); // Adjust this path to your main 3D lab route
+      navigate('/3d-lab');
     }
   };
 
@@ -42,6 +44,10 @@ const Simulator = () => {
       } catch (err) {
         setError(err.message);
         console.error('Fetch error:', err);
+        toast.error('Failed to load data', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
       } finally {
         setLoading(false);
       }
@@ -98,32 +104,110 @@ const Simulator = () => {
         `http://localhost:5000/api/oscillations/${id}`,
         updatedData
       );
+      toast.success('Record updated successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       return response.data;
     } catch (err) {
       console.error('Update error:', err);
+      toast.error('Failed to update record', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       throw err;
     }
   };
 
   const deleteRecord = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this record?')) return;
-
     try {
+      // Show custom confirmation dialog
+      const confirmDelete = await new Promise((resolve) => {
+        toast.info(
+          <div>
+            <p>Are you sure you want to delete this record?</p>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '10px',
+                marginTop: '10px',
+              }}
+            >
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => {
+                  toast.dismiss();
+                  resolve(true);
+                }}
+              >
+                Delete
+              </button>
+              <button
+                className="btn btn-secondary btn-sm"
+                onClick={() => {
+                  toast.dismiss();
+                  resolve(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>,
+          {
+            position: 'top-center',
+            autoClose: false,
+            closeButton: false,
+            draggable: false,
+            closeOnClick: false,
+          }
+        );
+      });
+
+      if (!confirmDelete) return;
+
+      // Optimistic UI update - remove immediately
+      setOscillations((prev) => prev.filter((r) => r.id !== id));
+
+      // API call to delete
       await axios.delete(`http://localhost:5000/api/oscillations/${id}`);
+
+      // Success notification
+      toast.success('Record deleted successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
     } catch (err) {
       console.error('Delete error:', err);
-      alert('Delete failed');
+      // Error notification
+      toast.error('Failed to delete record', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      // Revert by fetching fresh data
+      const response = await axios.get(
+        'http://localhost:5000/api/oscillations'
+      );
+      setOscillations(response.data);
     }
   };
 
   const addRecord = async (newData) => {
     try {
-      const tempId = Date.now(); // Temporary unique ID
-      const tempData = { ...newData, id: tempId, temp: true }; // Add temp flag
+      const tempId = Date.now();
+      const tempData = { ...newData, id: tempId, temp: true };
       setOscillations((prev) => [...prev, tempData]);
       await axios.post('http://localhost:5000/api/oscillations', newData);
+      toast.success('Record added successfully', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
     } catch (err) {
       console.error('Create error:', err);
+      toast.error('Failed to add record', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
     }
   };
 
@@ -158,7 +242,7 @@ const Simulator = () => {
   }
 
   if (selectedOption === '3d-lab') {
-    return null; // The navigation will handle this
+    return null;
   }
 
   if (loading || error) {
@@ -174,6 +258,18 @@ const Simulator = () => {
 
   return (
     <div className="theory-section">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
       <div className="content-wrapper">
         <div className="text-content">
           <div className="oscillations-page">

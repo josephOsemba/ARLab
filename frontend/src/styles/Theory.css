@@ -289,3 +289,37 @@ h4 {
   color: #4a89dc;
   margin-bottom: 1rem;
 }
+
+/* Custom toast styles */
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: inherit;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.Toastify__toast--success {
+  background: #4caf50;
+}
+
+.Toastify__toast--error {
+  background: #f44336;
+}
+
+.Toastify__toast--info {
+  background: #2196f3;
+}
+
+.Toastify__toast-body {
+  font-size: 14px;
+}
+
+/* Confirmation dialog buttons */
+.toast-confirm-button {
+  padding: 5px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 5px;
+}

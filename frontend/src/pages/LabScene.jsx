@@ -31,10 +31,11 @@ const LabScene = ({ experimentId }) => {
     }
   };
 
-  const handleObjectAdd = (objectType) => {
+  const handleObjectAdd = (objectType, modelUrl) => {
     const newObject = {
       id: `${objectType}-${Date.now()}`,
       type: objectType,
+      modelUrl, // Add the model URL from the backend
       position: [0, 0, 0],
       rotation: [0, 0, 0],
       scale: [1, 1, 1],
@@ -56,22 +57,42 @@ const LabScene = ({ experimentId }) => {
     }
   };
 
-  // Define the saveScene function
   const saveScene = (objects) => {
-    // Example: Save the scene objects to localStorage
     console.log('Saving scene...', objects);
     localStorage.setItem('savedScene', JSON.stringify(objects));
   };
 
   return (
-    <div className="lab-scene-container">
+    <div
+      className="lab-scene-container"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        width: '100vw',
+        overflow: 'hidden',
+        backgroundColor: '#1a1a1a',
+      }}
+    >
       <SceneToolbar
         viewMode={viewMode}
         onViewModeChange={setViewMode}
-        onSaveScene={() => saveScene(sceneObjects)} // Now calling the saveScene function
+        onSaveScene={() => saveScene(sceneObjects)}
+        style={{
+          height: '60px',
+          backgroundColor: '#252525',
+          borderBottom: '1px solid #333',
+        }}
       />
 
-      <div className="lab-scene-content">
+      <div
+        className="lab-scene-content"
+        style={{
+          display: 'flex',
+          flex: 1,
+          overflow: 'hidden',
+        }}
+      >
         <SceneSideBar
           isOpen={isSidebarOpen}
           onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -79,19 +100,38 @@ const LabScene = ({ experimentId }) => {
           onExperimentChange={loadExperiment}
         />
 
-        <div className="scene-viewport">
+        <div
+          className="scene-viewport"
+          style={{
+            flex: 1,
+            position: 'relative',
+            backgroundColor: '#2a2a2a',
+            overflow: 'hidden',
+          }}
+        >
           <ExperimentView
             sceneObjects={sceneObjects}
             selectedObject={selectedObject}
             onObjectSelect={setSelectedObject}
             onObjectUpdate={handleObjectUpdate}
             viewMode={viewMode}
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
           />
         </div>
 
         <EquipmentPalette
           equipmentList={selectedExperiment?.requiredEquipment || []}
           onAddObject={handleObjectAdd}
+          style={{
+            width: '250px',
+            backgroundColor: '#252525',
+            borderLeft: '1px solid #333',
+            padding: '15px',
+            overflowY: 'auto',
+          }}
         />
       </div>
 
@@ -100,6 +140,19 @@ const LabScene = ({ experimentId }) => {
           object={selectedObject}
           onUpdate={handleObjectUpdate}
           onRemove={handleObjectRemove}
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            backgroundColor: 'rgba(37, 37, 37, 0.9)',
+            padding: '15px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+            zIndex: 100,
+            width: '80%',
+            maxWidth: '600px',
+          }}
         />
       )}
     </div>

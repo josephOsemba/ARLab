@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 
 // Draggable 3D Model
-const LabAppliance = ({ name, file, icon }) => {
+const LabAppliance = ({ name, file, icon, modelUrl }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'APPLIANCE',
-    item: { name, file },
+    item: { name, modelUrl },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -27,12 +27,8 @@ const LabAppliance = ({ name, file, icon }) => {
         transition: 'transform 0.3s ease',
         fontSize: '14px',
       }}
-      onMouseEnter={(e) => {
-        e.target.style.transform = 'scale(1.02)';
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.transform = 'scale(1)';
-      }}
+      onMouseEnter={(e) => (e.target.style.transform = 'scale(1.02)')}
+      onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
     >
       {icon && (
         <div style={{ fontSize: '20px', marginBottom: '5px' }}>{icon}</div>
@@ -102,6 +98,7 @@ const ExperimentCategory = ({ title, experiments, titleColor }) => {
                     name={appliance.name}
                     file={appliance.file}
                     icon={appliance.icon}
+                    modelUrl={appliance.modelUrl}
                   />
                 ))}
               </div>
@@ -117,11 +114,7 @@ const SceneSideBar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [categories, setCategories] = useState({
     physics: {
-      'Pendulum Gravity': [
-        { name: 'Stand', file: 'pendulum_stand.glb', icon: '🪜' },
-        { name: 'String', file: 'string.glb', icon: '🧵' },
-        { name: 'Bob', file: 'pendulum_bob.glb', icon: '⏺️' },
-      ],
+      'Pendulum Gravity': [],
       'Projectile Motion': [
         { name: 'Launcher', file: 'launcher.glb', icon: '↗️' },
         { name: 'Projectile', file: 'ball.glb', icon: '⚽' },
@@ -191,17 +184,72 @@ const SceneSideBar = () => {
   });
 
   useEffect(() => {
-    // Fetch data from backend if needed
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch('http://localhost:5000/api/labscene/models');
-    //     const data = await response.json();
-    //     setCategories(data);
-    //   } catch (error) {
-    //     console.error('Error fetching data:', error);
-    //   }
-    // };
-    // fetchData();
+    const fetchPendulumModels = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:5000/api/labscene/pendulum-models'
+        );
+        const models = await response.json();
+
+        setCategories((prev) => ({
+          ...prev,
+          physics: {
+            ...prev.physics,
+            'Pendulum Gravity': [
+              { name: 'Bob', icon: '⏺️', modelUrl: models.bob },
+              { name: '2m String', icon: '🧵', modelUrl: models.string },
+              { name: 'Stand', icon: '🪜', modelUrl: models.stand },
+              { name: 'Protractor', icon: '📐', modelUrl: models.protractor },
+              { name: 'Meter Rule', icon: '📏', modelUrl: models.meterRule },
+              { name: 'Stopwatch', icon: '⏱️', modelUrl: models.stopwatch },
+            ],
+          },
+        }));
+      } catch (error) {
+        console.error('Failed to fetch pendulum models:', error);
+        // Fallback to placeholder items
+        setCategories((prev) => ({
+          ...prev,
+          physics: {
+            ...prev.physics,
+            'Pendulum Gravity': [
+              {
+                name: 'Bob',
+                icon: '⏺️',
+                modelUrl: '/models/fallback/pendulum_bob.glb',
+              },
+              {
+                name: '2m String',
+                icon: '🧵',
+                modelUrl: '/models/fallback/string.glb',
+              },
+              {
+                name: 'Stand',
+                icon: '🪜',
+                modelUrl: '/models/fallback/stand.glb',
+              },
+              {
+                name: 'Protractor',
+                icon: '📐',
+                modelUrl: '/models/fallback/protractor.glb',
+              },
+              {
+                name: 'Meter Rule',
+                icon: '📏',
+                modelUrl: '/models/fallback/meter_rule.glb',
+              },
+              {
+                name: 'Stopwatch',
+                icon: '⏱️',
+                modelUrl: '/models/fallback/stopwatch.glb',
+              },
+            ],
+          },
+        }));
+      }
+    };
+
+    fetchPendulumModels();
   }, []);
 
   return (
