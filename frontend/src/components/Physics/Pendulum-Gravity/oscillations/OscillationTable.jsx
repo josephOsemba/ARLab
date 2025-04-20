@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const OscillationTable = ({ data, onUpdate, onDelete }) => {
+const OscillationTable = forwardRef(({ data, onUpdate, onDelete }, ref) => {
   const [editableId, setEditableId] = useState(null);
   const [formState, setFormState] = useState({ length: '', time20: '' });
   const [errors, setErrors] = useState({});
@@ -66,7 +66,6 @@ const OscillationTable = ({ data, onUpdate, onDelete }) => {
       cancelEdit();
     } catch (error) {
       console.error('Save failed:', error);
-      // Consider adding user feedback here
     }
   };
 
@@ -76,7 +75,7 @@ const OscillationTable = ({ data, onUpdate, onDelete }) => {
   };
 
   return (
-    <table className="oscillation-table">
+    <table className="oscillation-table" ref={ref}>
       <thead>
         <tr>
           <th>Length (m)</th>
@@ -139,7 +138,7 @@ const OscillationTable = ({ data, onUpdate, onDelete }) => {
                   <button
                     onClick={handleSave}
                     className="save-btn"
-                    disabled={errors.length || errors.time20}
+                    disabled={!!errors.length || !!errors.time20}
                   >
                     Save
                   </button>
@@ -169,7 +168,7 @@ const OscillationTable = ({ data, onUpdate, onDelete }) => {
       </tbody>
     </table>
   );
-};
+});
 
 OscillationTable.propTypes = {
   data: PropTypes.arrayOf(

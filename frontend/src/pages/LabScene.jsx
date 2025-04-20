@@ -27,8 +27,7 @@ const LabScene = () => {
           }}
         >
           <h1 style={{ marginTop: '0px' }}>Physics Lab</h1>
-
-          {/* Experiment Selection Dropdown 
+          {/*Experiment Selection Dropdown*/}
           <label>Select Experiment: </label>
           <select
             onChange={(e) => setSelectedExperiment(e.target.value)}
@@ -43,9 +42,8 @@ const LabScene = () => {
             }}
           >
             <option value="ohmsLaw">Ohm&apos;s Law</option>
-            {/* Future experiments can be added here *
-          </select>*/}
-
+            {/* Future experiments can be added here **/}
+          </select>
           {/* Render Selected Experiment */}
           <div style={{ marginTop: '20px' }}>
             {selectedExperiment === 'ohmsLaw' && <OhmsLawExperiment />}

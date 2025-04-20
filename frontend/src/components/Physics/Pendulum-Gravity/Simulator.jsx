@@ -21,6 +21,7 @@ const Simulator = () => {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    setTimeout(() => setShowOptions(false), 300);
     setShowOptions(false);
 
     if (option === '3d-lab') {
@@ -160,8 +161,16 @@ const Simulator = () => {
     return null; // The navigation will handle this
   }
 
-  if (loading) return <div className="loading">Loading data...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
+  if (loading || error) {
+    return (
+      <div className="theory-section">
+        <div className="content-wrapper">
+          {loading && <div className="loading">Loading data...</div>}
+          {error && <div className="error">Error: {error}</div>}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="theory-section">

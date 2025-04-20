@@ -8,9 +8,9 @@ import '../styles/EntryPage.css';
 import physicsImg from '/assets/health.jpg';
 import biologyImg from '/assets/biology.png';
 import chemistryImg from '/assets/circuit-simulator.jpg';
-import engineeringImg from '/public/assets/molecular-lab.jpg';
-import healthImg from '/public/assets/mechanics-lab.jpg';
-import homeScienceImg from '/public/assets/ohms-law.jpg';
+import engineeringImg from '/assets/molecular-lab.jpg';
+import healthImg from '/assets/mechanics-lab.jpg';
+import homeScienceImg from '/assets/ohms-law.jpg';
 
 const EntryPage = () => {
   const [darkMode, setDarkMode] = useState(false);
