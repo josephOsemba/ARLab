@@ -8,9 +8,12 @@ import '../styles/EntryPage.css';
 import physicsImg from '/assets/health.jpg';
 import biologyImg from '/assets/biology.png';
 import chemistryImg from '/assets/circuit-simulator.jpg';
-import engineeringImg from '/assets/molecular-lab.jpg';
+import engineeringImg from '/assets/eng.png';
 import healthImg from '/assets/mechanics-lab.jpg';
-import homeScienceImg from '/assets/ohms-law.jpg';
+import homeScienceImg from '/assets/hs.jpg';
+import earthScienceImg from '/assets/earth-science.jpg';
+import maths from '/assets/maths.png';
+import ict from '/assets/ictt.jpg';
 
 const EntryPage = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -113,10 +116,31 @@ const EntryPage = () => {
       path: '/engineering',
     },
     {
+      title: 'EARTH SCIENCE',
+      image: earthScienceImg,
+      description:
+        'Earth Science encompasses a wide range of scientific disciplines focused on understanding our planet and its place in the solar system.',
+      path: '/engineering',
+    },
+    {
+      title: 'MATHEMATICAL SCIENCE',
+      image: maths,
+      description:
+        'Mathematical sciences encompass a broad range of disciplines that utilize mathematical principles, methods, and models to understand and solve problems in various fields. ',
+      path: '/health-education',
+    },
+    {
       title: 'HEALTH EDUCATION',
       image: healthImg,
       description:
         'Engage in virtual health training, anatomy modules, and medical simulations.',
+      path: '/health-education',
+    },
+    {
+      title: 'COMPUTERS',
+      image: ict,
+      description:
+        ' It encompasses the use of various technological tools and resources for transmitting, storing, creating, and exchanging information. ',
       path: '/health-education',
     },
     {

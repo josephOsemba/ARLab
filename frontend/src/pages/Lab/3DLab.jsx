@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const PendulumExperiment = () => {
   const [length, setLength] = useState(20); // Initial length in cm
-  const [amplitude, setAmplitude] = useState(30); // Initial angle in degrees
+  const [amplitude, setAmplitude] = useState(8); // Initial angle in degrees
   const [isPlaying, setIsPlaying] = useState(false);
   const [period, setPeriod] = useState(0);
   const [showGraph, setShowGraph] = useState(false);
@@ -13,12 +13,13 @@ const PendulumExperiment = () => {
   const [currentLengthIndex, setCurrentLengthIndex] = useState(0);
   const [isAutoRecording, setIsAutoRecording] = useState(false);
 
-  const lengthOptions = [20, 40, 60, 80, 100, 120, 140]; // Standard lengths to test
+  const lengthOptions = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]; // Standard lengths to test
 
   // Calculate period based on length (T = 2π√(l/g))
   useEffect(() => {
     const g = 9.81; // standard gravity
-    const calculatedPeriod = 2 * Math.PI * Math.sqrt(length / 100 / g);
+    const l = length / 100;
+    const calculatedPeriod = 2 * Math.PI * Math.sqrt(l / g);
     setPeriod(calculatedPeriod.toFixed(3));
   }, [length]);
 
