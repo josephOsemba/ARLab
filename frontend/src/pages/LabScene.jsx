@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useDrop } from 'react-dnd';
 import SceneSideBar from '../components/LabComponents/SceneSideBar';
 import ExperimentControls from '../components/LabComponents/ExperimentControl';
 import EquipmentPalette from '../components/LabComponents/EquipmentPalette';
@@ -14,6 +15,32 @@ const LabScene = ({ experimentId }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [viewMode, setViewMode] = useState('perspective');
   const sceneRef = useRef();
+
+  // Add drop target functionality
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: 'APPLIANCE',
+    drop: (item, monitor) => {
+      const offset = monitor.getClientOffset();
+      if (offset && sceneRef.current) {
+        const rect = sceneRef.current.getBoundingClientRect();
+        const x = offset.x - rect.left;
+        const y = offset.y - rect.top;
+
+        // Convert screen coordinates to 3D scene coordinates
+        // This is a simplified example - you'll need to adjust based on your 3D library
+        const position = [
+          (x / rect.width) * 10 - 5, // X coordinate (-5 to 5 range)
+          0, // Y coordinate (ground level)
+          -(y / rect.height) * 10 + 5, // Z coordinate (-5 to 5 range)
+        ];
+
+        handleObjectAdd(item.name, item.modelUrl, position);
+      }
+    },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
 
   useEffect(() => {
     if (experimentId) {
@@ -31,12 +58,12 @@ const LabScene = ({ experimentId }) => {
     }
   };
 
-  const handleObjectAdd = (objectType, modelUrl) => {
+  const handleObjectAdd = (objectType, modelUrl, position = [0, 0, 0]) => {
     const newObject = {
       id: `${objectType}-${Date.now()}`,
       type: objectType,
-      modelUrl, // Add the model URL from the backend
-      position: [0, 0, 0],
+      modelUrl,
+      position,
       rotation: [0, 0, 0],
       scale: [1, 1, 1],
       properties: {},
@@ -101,25 +128,29 @@ const LabScene = ({ experimentId }) => {
         />
 
         <div
+          ref={drop}
           className="scene-viewport"
           style={{
             flex: 1,
             position: 'relative',
-            backgroundColor: '#2a2a2a',
+            backgroundColor: isOver ? '#3a3a3a' : '#2a2a2a',
             overflow: 'hidden',
+            transition: 'background-color 0.3s ease',
           }}
         >
-          <ExperimentView
-            sceneObjects={sceneObjects}
-            selectedObject={selectedObject}
-            onObjectSelect={setSelectedObject}
-            onObjectUpdate={handleObjectUpdate}
-            viewMode={viewMode}
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-          />
+          <div ref={sceneRef} style={{ width: '100%', height: '100%' }}>
+            <ExperimentView
+              sceneObjects={sceneObjects}
+              selectedObject={selectedObject}
+              onObjectSelect={setSelectedObject}
+              onObjectUpdate={handleObjectUpdate}
+              viewMode={viewMode}
+              style={{
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          </div>
         </div>
 
         <EquipmentPalette

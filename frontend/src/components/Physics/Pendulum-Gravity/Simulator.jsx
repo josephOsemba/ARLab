@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import OscillationTable from './oscillations/OscillationTable';
@@ -21,17 +22,20 @@ const Simulator = () => {
   const chartRef = useRef();
   const navigate = useNavigate();
 
+  // Handle 3D lab option redirection
+  if (selectedOption === '3d-lab') {
+    return <Navigate to="../../../pages/Lab/3DLab.jsx" replace />;
+  }
+
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setTimeout(() => setShowOptions(false), 300);
     setShowOptions(false);
-
     if (option === '3d-lab') {
       navigate('/3d-lab');
     }
   };
 
-  // Fetch initial data
   useEffect(() => {
     if (selectedOption !== 'existing') return;
 

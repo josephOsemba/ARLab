@@ -323,3 +323,70 @@ h4 {
   font-weight: 500;
   margin: 0 5px;
 }
+
+.lab-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.lab-sidebar {
+  width: 300px;
+  background: #2d2d2d;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.lab-viewport {
+  flex: 1;
+  position: relative;
+}
+
+.back-button {
+  background: #444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.experiment-list,
+.equipment-list {
+  margin-top: 10px;
+}
+
+.lab-appliance {
+  padding: 10px;
+  margin: 5px 0;
+  background: #3a3a3a;
+  border-radius: 4px;
+  cursor: grab;
+  transition: all 0.2s;
+}
+
+.lab-appliance:hover {
+  background: #4a4a4a;
+}
+
+.lab-appliance.dragging {
+  opacity: 0.5;
+}
+
+.simulation-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.simulation-controls button {
+  padding: 10px 20px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

@@ -115,99 +115,269 @@ const SceneSideBar = () => {
   const [categories, setCategories] = useState({
     physics: {
       'Pendulum Gravity': [],
-      'Projectile Motion': [
-        { name: 'Launcher', file: 'launcher.glb', icon: '↗️' },
-        { name: 'Projectile', file: 'ball.glb', icon: '⚽' },
-        { name: 'Measuring Tape', file: 'tape.glb', icon: '📏' },
-      ],
-      "Newton's Second Law": [
-        { name: 'Cart', file: 'cart.glb', icon: '🛒' },
-        { name: 'Weights', file: 'weights.glb', icon: '⚖️' },
-        { name: 'Pulley', file: 'pulley.glb', icon: '🌀' },
-      ],
-      'Inclined Plane': [
-        { name: 'Plane', file: 'inclined_plane.glb', icon: '📐' },
-        { name: 'Block', file: 'wooden_block.glb', icon: '🧱' },
-        { name: 'Protractor', file: 'protractor.glb', icon: '📐' },
-      ],
+      'Projectile Motion': [],
+      "Newton's Second Law": [],
+      'Inclined Plane': [],
     },
     biology: {
-      'Microscope Observation': [
-        { name: 'Microscope', file: 'microscope.glb', icon: '🔬' },
-        { name: 'Slide', file: 'slide.glb', icon: '🖲️' },
-      ],
-      'DNA Extraction': [
-        { name: 'Test Tube', file: 'test_tube.glb', icon: '🧪' },
-        { name: 'Centrifuge', file: 'centrifuge.glb', icon: '🌀' },
-      ],
+      'Microscope Observation': [],
+      'DNA Extraction': [],
     },
     chemistry: {
-      Titration: [
-        { name: 'Burette', file: 'burette.glb', icon: '🧪' },
-        { name: 'Flask', file: 'flask.glb', icon: '⚗️' },
-      ],
-      'Chemical Reactions': [
-        { name: 'Beaker', file: 'beaker.glb', icon: '🥃' },
-        { name: 'Bunsen Burner', file: 'burner.glb', icon: '🔥' },
-      ],
+      Titration: [],
+      'Chemical Reactions': [],
     },
     engineering: {
-      'Bridge Construction': [
-        { name: 'Beams', file: 'beams.glb', icon: '⛓️' },
-        { name: 'Joints', file: 'joints.glb', icon: '⚙️' },
-      ],
-      'Circuit Design': [
-        { name: 'Breadboard', file: 'breadboard.glb', icon: '🔌' },
-        { name: 'Resistors', file: 'resistors.glb', icon: '🔋' },
-      ],
+      'Bridge Construction': [],
+      'Circuit Design': [],
     },
     healthEducation: {
-      'First Aid': [
-        { name: 'Bandages', file: 'bandages.glb', icon: '🩹' },
-        { name: 'Dummy', file: 'dummy.glb', icon: '🧍' },
-      ],
-      Nutrition: [
-        { name: 'Food Models', file: 'food_models.glb', icon: '🍎' },
-        { name: 'Scale', file: 'scale.glb', icon: '⚖️' },
-      ],
+      'First Aid': [],
+      Nutrition: [],
     },
     homeScience: {
-      'Textile Testing': [
-        { name: 'Fabric Samples', file: 'fabrics.glb', icon: '🧵' },
-        { name: 'Sewing Machine', file: 'sewing_machine.glb', icon: '🧶' },
-      ],
-      'Food Preservation': [
-        { name: 'Jars', file: 'jars.glb', icon: '🍯' },
-        { name: 'Vacuum Sealer', file: 'sealer.glb', icon: '📦' },
-      ],
+      'Textile Testing': [],
+      'Food Preservation': [],
     },
   });
 
   useEffect(() => {
-    const fetchPendulumModels = async () => {
+    const fetchModels = async () => {
       try {
-        const response = await fetch(
+        // Fetch pendulum models
+        const pendulumResponse = await fetch(
           'http://localhost:5000/api/labscene/pendulum-models'
         );
-        const models = await response.json();
+        const pendulumModels = await pendulumResponse.json();
 
-        setCategories((prev) => ({
-          ...prev,
+        // Fetch all 3D models
+        const allModelsResponse = await fetch(
+          'http://localhost:5000/api/labscene/3d-models'
+        );
+        const allModels = await allModelsResponse.json();
+
+        setCategories({
           physics: {
-            ...prev.physics,
             'Pendulum Gravity': [
-              { name: 'Bob', icon: '⏺️', modelUrl: models.bob },
-              { name: '2m String', icon: '🧵', modelUrl: models.string },
-              { name: 'Stand', icon: '🪜', modelUrl: models.stand },
-              { name: 'Protractor', icon: '📐', modelUrl: models.protractor },
-              { name: 'Meter Rule', icon: '📏', modelUrl: models.meterRule },
-              { name: 'Stopwatch', icon: '⏱️', modelUrl: models.stopwatch },
+              { name: 'Bob', icon: '⏺️', modelUrl: pendulumModels.bob },
+              {
+                name: '2m String',
+                icon: '🧵',
+                modelUrl: pendulumModels.string,
+              },
+              { name: 'Stand', icon: '🪜', modelUrl: pendulumModels.stand },
+              {
+                name: 'Protractor',
+                icon: '📐',
+                modelUrl: pendulumModels.protractor,
+              },
+              {
+                name: 'Meter Rule',
+                icon: '📏',
+                modelUrl: pendulumModels.meterRule,
+              },
+              {
+                name: 'Stopwatch',
+                icon: '⏱️',
+                modelUrl: pendulumModels.stopwatch,
+              },
+            ],
+            'Projectile Motion': [
+              {
+                name: 'Launcher',
+                icon: '↗️',
+                modelUrl:
+                  allModels.launcher || '/models/projectile/launcher.glb',
+              },
+              {
+                name: 'Projectile',
+                icon: '⚽',
+                modelUrl: allModels.projectile || '/models/projectile/ball.glb',
+              },
+              {
+                name: 'Measuring Tape',
+                icon: '📏',
+                modelUrl: allModels.tape || '/models/projectile/tape.glb',
+              },
+            ],
+            "Newton's Second Law": [
+              {
+                name: 'Cart',
+                icon: '🛒',
+                modelUrl: allModels.cart || '/models/newton/cart.glb',
+              },
+              {
+                name: 'Weights',
+                icon: '⚖️',
+                modelUrl: allModels.weights || '/models/newton/weights.glb',
+              },
+              {
+                name: 'Pulley',
+                icon: '🌀',
+                modelUrl: allModels.pulley || '/models/newton/pulley.glb',
+              },
+            ],
+            'Inclined Plane': [
+              {
+                name: 'Plane',
+                icon: '📐',
+                modelUrl:
+                  allModels.inclined_plane || '/models/inclined/plane.glb',
+              },
+              {
+                name: 'Block',
+                icon: '🧱',
+                modelUrl:
+                  allModels.wooden_block || '/models/inclined/block.glb',
+              },
+              {
+                name: 'Protractor',
+                icon: '📐',
+                modelUrl: pendulumModels.protractor,
+              },
             ],
           },
-        }));
+          biology: {
+            'Microscope Observation': [
+              {
+                name: 'Microscope',
+                icon: '🔬',
+                modelUrl:
+                  allModels.microscope || '/models/biology/microscope.glb',
+              },
+              {
+                name: 'Slide',
+                icon: '🖲️',
+                modelUrl: allModels.slide || '/models/biology/slide.glb',
+              },
+            ],
+            'DNA Extraction': [
+              {
+                name: 'Test Tube',
+                icon: '🧪',
+                modelUrl:
+                  allModels.test_tube || '/models/biology/test_tube.glb',
+              },
+              {
+                name: 'Centrifuge',
+                icon: '🌀',
+                modelUrl:
+                  allModels.centrifuge || '/models/biology/centrifuge.glb',
+              },
+            ],
+          },
+          chemistry: {
+            Titration: [
+              {
+                name: 'Burette',
+                icon: '🧪',
+                modelUrl: allModels.burette || '/models/chemistry/burette.glb',
+              },
+              {
+                name: 'Flask',
+                icon: '⚗️',
+                modelUrl: allModels.flask || '/models/chemistry/flask.glb',
+              },
+            ],
+            'Chemical Reactions': [
+              {
+                name: 'Beaker',
+                icon: '🥃',
+                modelUrl: allModels.beaker || '/models/chemistry/beaker.glb',
+              },
+              {
+                name: 'Bunsen Burner',
+                icon: '🔥',
+                modelUrl: allModels.burner || '/models/chemistry/burner.glb',
+              },
+            ],
+          },
+          engineering: {
+            'Bridge Construction': [
+              {
+                name: 'Beams',
+                icon: '⛓️',
+                modelUrl: allModels.beams || '/models/engineering/beams.glb',
+              },
+              {
+                name: 'Joints',
+                icon: '⚙️',
+                modelUrl: allModels.joints || '/models/engineering/joints.glb',
+              },
+            ],
+            'Circuit Design': [
+              {
+                name: 'Breadboard',
+                icon: '🔌',
+                modelUrl:
+                  allModels.breadboard || '/models/engineering/breadboard.glb',
+              },
+              {
+                name: 'Resistors',
+                icon: '🔋',
+                modelUrl:
+                  allModels.resistors || '/models/engineering/resistors.glb',
+              },
+            ],
+          },
+          healthEducation: {
+            'First Aid': [
+              {
+                name: 'Bandages',
+                icon: '🩹',
+                modelUrl: allModels.bandages || '/models/health/bandages.glb',
+              },
+              {
+                name: 'Dummy',
+                icon: '🧍',
+                modelUrl: allModels.dummy || '/models/health/dummy.glb',
+              },
+            ],
+            Nutrition: [
+              {
+                name: 'Food Models',
+                icon: '🍎',
+                modelUrl:
+                  allModels.food_models || '/models/health/food_models.glb',
+              },
+              {
+                name: 'Scale',
+                icon: '⚖️',
+                modelUrl: allModels.scale || '/models/health/scale.glb',
+              },
+            ],
+          },
+          homeScience: {
+            'Textile Testing': [
+              {
+                name: 'Fabric Samples',
+                icon: '🧵',
+                modelUrl: allModels.fabrics || '/models/home/fabrics.glb',
+              },
+              {
+                name: 'Sewing Machine',
+                icon: '🧶',
+                modelUrl:
+                  allModels.sewing_machine || '/models/home/sewing_machine.glb',
+              },
+            ],
+            'Food Preservation': [
+              {
+                name: 'Jars',
+                icon: '🍯',
+                modelUrl: allModels.jars || '/models/home/jars.glb',
+              },
+              {
+                name: 'Vacuum Sealer',
+                icon: '📦',
+                modelUrl: allModels.sealer || '/models/home/sealer.glb',
+              },
+            ],
+          },
+        });
       } catch (error) {
-        console.error('Failed to fetch pendulum models:', error);
-        // Fallback to placeholder items
+        console.error('Failed to fetch models:', error);
+        // Fallback to default models
         setCategories((prev) => ({
           ...prev,
           physics: {
@@ -249,7 +419,7 @@ const SceneSideBar = () => {
       }
     };
 
-    fetchPendulumModels();
+    fetchModels();
   }, []);
 
   return (
